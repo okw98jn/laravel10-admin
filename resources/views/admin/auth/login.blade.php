@@ -1,104 +1,29 @@
-@extends('adminlte::auth.auth-page', ['auth_type' => 'login'])
+<x-layouts.guest>
 
-@section('adminlte_css_pre')
-    <link rel="stylesheet" href="{{ asset('vendor/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-@stop
-
-@php( $login_url = View::getSection('login_url') ?? config('adminlte.login_url', 'login') )
-@php( $register_url = View::getSection('register_url') ?? config('adminlte.register_url', 'register') )
-@php( $password_reset_url = View::getSection('password_reset_url') ?? config('adminlte.password_reset_url', 'password/reset') )
-
-@if (config('adminlte.use_route_url', false))
-    @php( $login_url = $login_url ? route($login_url) : '' )
-    @php( $register_url = $register_url ? route($register_url) : '' )
-    @php( $password_reset_url = $password_reset_url ? route($password_reset_url) : '' )
-@else
-    @php( $login_url = $login_url ? url($login_url) : '' )
-    @php( $register_url = $register_url ? url($register_url) : '' )
-    @php( $password_reset_url = $password_reset_url ? url($password_reset_url) : '' )
-@endif
-
-@section('auth_header', __('adminlte::adminlte.login_message'))
-
-@section('auth_body')
-    <form action="{{ $login_url }}" method="post">
+    <form method="POST" action="{{ route('login') }}">
         @csrf
-
-        {{-- Login_id field --}}
-        <div class="input-group mb-3">
-            <input type="text" name="login_id" class="form-control @error('login_id') is-invalid @enderror"
-                    value="{{ old('login_id') }}" placeholder="{{ __('Login Id') }}" autofocus>
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-envelope {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('login_id')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+        <!-- Email Address -->
+        <div>
+            <x-admin.auth.input-label for="login_id" :value="__('Login Id')" />
+            <x-admin.auth.text-input id="login_id" class="block mt-1 w-full" type="text" name="login_id" :value="old('login_id')" required autofocus autocomplete="username" />
+            <x-admin.auth.input-error :messages="$errors->get('login_id')" class="mt-2" />
         </div>
-
-        {{-- Password field --}}
-        <div class="input-group mb-3">
-            <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                    placeholder="{{ __('Password') }}">
-
-            <div class="input-group-append">
-                <div class="input-group-text">
-                    <span class="fas fa-lock {{ config('adminlte.classes_auth_icon', '') }}"></span>
-                </div>
-            </div>
-
-            @error('password')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-            @enderror
+        <!-- Password -->
+        <div class="mt-4">
+            <x-admin.auth.input-label for="password" :value="__('Password')" />
+            <x-admin.auth.text-input id="password" class="block mt-1 w-full"
+                            type="password"
+                            name="password"
+                            required autocomplete="current-password" />
+            <x-admin.auth.input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
-
-        {{-- Login field --}}
-        <div class="row">
-            <div class="col-7">
-                {{-- <div class="icheck-primary" title="{{ __('adminlte::adminlte.remember_me_hint') }}">
-                    <input type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                    <label for="remember">
-                        {{ __('adminlte::adminlte.remember_me') }}
-                    </label>
-                </div> --}}
-            </div>
-
-            <div class="col-5">
-                <button type=submit class="btn btn-block {{ config('adminlte.classes_auth_btn', 'btn-flat btn-primary') }}">
-                    <span class="fas fa-sign-in-alt"></span>
-                    {{ __('adminlte::adminlte.sign_in') }}
-                </button>
-            </div>
+        <div class="flex items-center justify-end mt-4">
+            <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                {{ __('Already registered?') }}
+            </a>
+            <x-admin.auth.primary-button class="ml-3">
+                {{ __('Log in') }}
+            </x-admin.auth.primary-button>
         </div>
-
     </form>
-@stop
-
-@section('auth_footer')
-    {{-- Password reset link --}}
-    {{-- @if($password_reset_url)
-        <p class="my-0">
-            <a href="{{ $password_reset_url }}">
-                {{ __('adminlte::adminlte.i_forgot_my_password') }}
-            </a>
-        </p>
-    @endif --}}
-
-    {{-- Register link --}}
-    @if($register_url)
-        <p class="my-0">
-            <a href="{{ $register_url }}">
-                {{ __('adminlte::adminlte.register_a_new_membership') }}
-            </a>
-        </p>
-    @endif
-@stop
+</x-layouts.guest>
