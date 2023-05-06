@@ -26,12 +26,15 @@ Route::middleware('guest')->group(function () {
     Route::post('register', [RegisteredUserController::class, 'store']);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('top');
+    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
     // 管理者
     Route::prefix('admin')->name('admin.')->group(function () {
-        Route::get('/', [HomeController::class, 'index'])->name('top');
-        Route::get('admin', [AdminController::class, 'index'])->name('index');
+        Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::post('delete/{id}', [AdminController::class,'delete'])->name('delete');
     });
-    Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+    
     
 });

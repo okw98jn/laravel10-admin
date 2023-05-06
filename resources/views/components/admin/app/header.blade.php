@@ -7,7 +7,7 @@
             <div
                 class="flex flex-col gap-y-4 gap-x-0 mt-5 sm:flex-row sm:items-center sm:justify-end sm:gap-y-0 sm:gap-x-7 sm:mt-0 sm:pl-7">
                 <a class="flex items-center gap-x-2 font-medium text-gray-500 sm:my-4 sm:pl-6 dark:text-gray-400 dark:hover:text-blue-500 pr-5"
-                    href="#" data-hs-overlay="#hs-slide-up-animation-modal">
+                    href="#" data-hs-overlay="#logoutModal">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-4 h-4" width="16" height="16">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -16,7 +16,7 @@
 
                     Log out
                 </a>
-                <x-layouts.confirm-modal type="danger" title="確認" message="本当にログアウトしますか？" route="{{ route('logout') }}" btnText="ログアウト" />
+                <x-layouts.confirm-modal  id="logoutModal" type="danger" title="確認" message="本当にログアウトしますか？" route="{{ route('admin.logout') }}" btnText="ログアウト" />
             </div>
         </div>
     </nav>

@@ -41,7 +41,7 @@
             <ul class="space-y-1.5">
                 <li>
                     <a class="group flex items-center gap-x-3.5 py-2 px-2.5 rounded-md text-sm text-gray-400 hover:bg-gray-500 hover:text-white {{ Request::route()->getName() == 'admin.index' ? 'bg-gray-500 text-white' : '' }}"
-                        href="{{ route('admin.index') }}">
+                        href="{{ route('admin.admin.index') }}">
                         <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                             fill="currentColor" viewBox="0 0 16 16">
                             <path
