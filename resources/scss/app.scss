@@ -1,0 +1,27 @@
+// 各パーツの色
+.body-color {
+    background: #f7f7f7;
+}
+
+.header-color {
+    background: #ededed;
+}
+
+.side-color {
+    background: #2a3f54;
+}
+
+#alert {
+    animation: fadeOut 1s forwards;
+}
+
+// @keyframes fadeOut {
+//     from {
+//         opacity: 1;
+//         transform: translateX(0);
+//     }
+//     to {
+//         opacity: 0;
+//         transform: translateX(200%);
+//     }
+// }
