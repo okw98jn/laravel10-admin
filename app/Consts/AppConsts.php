@@ -13,5 +13,5 @@ class AppConsts
 
 
     public const DATE_FORMAT    = 'Y年n月j日';
-    public const PAGE_MAX_LIMIT = 3;
+    public const PAGE_MAX_LIMIT = 10;
 }

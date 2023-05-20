@@ -36,8 +36,8 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach ($admins as $admin)
-                                    <tr class="hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer">
+                                @foreach ($admins as $index => $admin)
+                                    <tr class="@if ($index % 2 == 1) bg-gray-50 @endif hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer">
                                         <x-admin.table.td>
                                             <x-admin.table.td-text text="{{ $admin->id }}" />
                                         </x-admin.table.td>
@@ -66,8 +66,11 @@
                             </tbody>
                         </table>
                         <!-- End Table -->
-                        <!-- Footer -->
-                        <x-admin.table.footer />
+                        <!-- Pagination -->
+                        <div
+                            class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
+                            {{ $admins->onEachSide(1)->links('vendor.pagination.tailwind') }}
+                        </div>
                         <!-- End Footer -->
                     </div>
                 </div>
