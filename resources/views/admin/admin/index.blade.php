@@ -37,7 +37,7 @@
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
                                 @foreach ($admins as $admin)
-                                    <tr>
+                                    <tr class="hover:bg-gray-100 transition duration-300 ease-in-out cursor-pointer">
                                         <x-admin.table.td>
                                             <x-admin.table.td-text text="{{ $admin->id }}" />
                                         </x-admin.table.td>
@@ -51,14 +51,15 @@
                                             <x-admin.table.td-text text="{{ AdminConsts::ROLE_LIST[$admin->role] }}" />
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <x-admin.table.td-status :status="$admin->status"/>
+                                            <x-admin.table.td-status :status="$admin->status" />
                                         </x-admin.table.td>
                                         <x-admin.table.td>
                                             <x-admin.table.td-text
                                                 text="{{ $admin->created_at->format(AppConsts::DATE_FORMAT) }}" />
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <x-admin.table.td-btns :id="$admin->id" routeEdit="" routeDelete="{{ route('admin.admin.delete', $admin->id) }}"/>
+                                            <x-admin.table.td-btns :id="$admin->id" routeEdit=""
+                                                routeDelete="{{ route('admin.admin.delete', $admin->id) }}" />
                                         </x-admin.table.td>
                                     </tr>
                                 @endforeach
@@ -75,5 +76,5 @@
         <!-- End Card -->
     </div>
     <!-- End Table Section -->
-    
+
 </x-layouts.admin-app>

@@ -226,7 +226,7 @@ return [
         'remember' => '記憶',
         'restored_at' => 'で復元',
         'result_text_under_image' => '画像の下の結果テキスト',
-        'role' => '役割',
+        'role' => '権限',
         'second' => '秒',
         'sex' => '性別',
         'short_text' => '短いテキスト',
@@ -247,6 +247,7 @@ return [
         'username' => 'ユーザー名',
         'year' => '年',
         'login_id' => 'ログインID',
+        'status' => 'ステータス',
     ],
 
 ];

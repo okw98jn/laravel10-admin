@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Admin\Admin;
 
-use App\Repositories\BaseRepository;
+use App\Repositories\CommonRepository;
 use App\Models\Admin\Admin;
 
 
-class AdminRepository extends BaseRepository implements AdminRepositoryInterface 
+class AdminRepository extends CommonRepository implements AdminRepositoryInterface 
 {
 
     public function __construct(Admin $admin)

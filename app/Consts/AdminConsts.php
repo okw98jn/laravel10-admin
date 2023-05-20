@@ -3,9 +3,6 @@ namespace App\Consts;
 
 class AdminConsts
 {
-    public const STATUS_VALID   = 1;
-    public const STATUS_INVALID = 0;
-
     public const ROLE_ADMIN = 0;
     public const ROLE_STAFF = 1;
 

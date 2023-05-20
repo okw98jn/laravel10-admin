@@ -33,6 +33,9 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // 管理者
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('create', [AdminController::class, 'create'])->name('create');
+        Route::post('confirm', [AdminController::class, 'confirm'])->name('confirm');
+        Route::post('store', [AdminController::class, 'store'])->name('store');
         Route::post('delete/{id}', [AdminController::class,'delete'])->name('delete');
     });
     

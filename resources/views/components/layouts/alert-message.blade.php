@@ -10,7 +10,7 @@
         </div>
         <div
             class="px-4 py-6 bg-white rounded-r-lg flex justify-between items-center w-full border border-l-transparent border-gray-200">
-            <div>{{ $message }}</div>
+            <div class="text-sm">{{ $message }}</div>
             <button class="close-button">
                 <svg xmlns="http://www.w3.org/2000/svg" class="fill-current text-gray-700" viewBox="0 0 16 16"
                     width="20" height="20">
