@@ -31,11 +31,6 @@ class AdminController extends Controller
     public function show(Request $request, $id)
     {
         $admin = $this->adminRepository->find($id);
-        if ($request->has('back')) {
-            return redirect()->route('admin.admin.index');
-        } elseif ($request->has('edit')) {
-            return redirect()->route('admin.admin.edit', $id);
-        }
         return view('admin.admin.show', compact('admin'));
     }
 
@@ -46,9 +41,6 @@ class AdminController extends Controller
 
     public function confirm(AdminRequest $request)
     {
-        if ($request->has('back')) {
-            return redirect()->route('admin.admin.index');
-        }
         $mode          = 'store';
         $inputs        = $request->all();
         $maskPassword  = $this->common->maskPassword($inputs['password']);
@@ -63,8 +55,8 @@ class AdminController extends Controller
         }
         $attributes             = $request->only(['name', 'login_id', 'password', 'role', 'status']);
         $attributes['password'] = Hash::make($request->input('password'));
-        $this->adminRepository->create($attributes);
-        return redirect()->route('admin.admin.index')->with('message', 'アカウントの登録が完了しました');
+        $admin = $this->adminRepository->create($attributes);
+        return redirect()->route('admin.admin.show', $admin->id)->with('message', 'アカウントの登録が完了しました');
     }
 
     public function edit($id)
@@ -75,9 +67,6 @@ class AdminController extends Controller
 
     public function editConfirm(AdminRequest $request, $id)
     {
-        if ($request->has('back')) {
-            return redirect()->route('admin.admin.show', $id);
-        }
         $mode   = 'update';
         $inputs = $request->all();
         unset($inputs['token']);

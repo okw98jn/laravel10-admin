@@ -32,7 +32,7 @@
                 @foreach ($inputs as $name => $val)
                     <x-admin.form.hidden name="{{ $name }}" value="{{ $val }}" />
                 @endforeach
-                <x-admin.form.btns leftBtnName="back" leftBtnText="戻る" rightBtnName="complete" rightBtnText="登録" />
+                <x-admin.form.btns leftBtnName="back" leftBtnText="戻る" leftBtnType="button" leftBtnRoute="" rightBtnText="登録" rightBtnType="button" rightBtnRoute="" />
             </form>
         </div>
         <!-- End Card -->

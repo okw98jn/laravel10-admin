@@ -23,7 +23,7 @@
                     <x-admin.form.radio id="status" name="status" :array="AppConsts::STATUS_LIST" :default="$admin->status" />
                 </div>
                 <!-- End Grid -->
-                <x-admin.form.btns leftBtnName="back" leftBtnText="戻る" rightBtnName="" rightBtnText="確認" />
+                <x-admin.form.btns leftBtnName="" leftBtnText="戻る" leftBtnType="a" leftBtnRoute="{{ route('admin.admin.show', $admin->id) }}" rightBtnText="確認" rightBtnType="button" rightBtnRoute="" />
             </form>
         </div>
         <!-- End Card -->
