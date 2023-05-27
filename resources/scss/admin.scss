@@ -1,3 +1,8 @@
+// 共通
+body {
+    font-family: "Noto Sans JP", sans-serif;
+}
+
 // 各パーツの色
 .body-color {
     background: #f7f7f7;
@@ -15,13 +20,9 @@
     animation: fadeOut 1s forwards;
 }
 
-// @keyframes fadeOut {
-//     from {
-//         opacity: 1;
-//         transform: translateX(0);
-//     }
-//     to {
-//         opacity: 0;
-//         transform: translateX(200%);
-//     }
-// }
+.error-txt {
+    padding-top: 5px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgb(255, 8, 0);
+}

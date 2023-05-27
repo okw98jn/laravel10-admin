@@ -1,5 +1,5 @@
 <div class="px-6 py-3">
-    @if ($status === AdminConsts::STATUS_VALID)
+    @if ($status === AppConsts::STATUS_VALID)
         <span
             class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200">
             <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -9,7 +9,7 @@
             </svg>
             有効
         </span>
-    @elseif ($status === AdminConsts::STATUS_INVALID)
+    @elseif ($status === AppConsts::STATUS_INVALID)
         <span
             class="inline-flex items-center gap-1.5 py-0.5 px-2 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200">
             <svg class="w-2.5 h-2.5" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
