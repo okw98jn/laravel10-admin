@@ -27,17 +27,22 @@ class AdminRequest extends FormRequest
             return [];
         }
 
-        return [
-            'name'                  => ['required'],
-            'login_id'              => [
+        $rules = [
+            'name'       => ['required'],
+            'login_id'   => [
                 'required',
-                Rule::unique('admins')->ignore($this->login_id ?? null)->whereNull('deleted_at'),
+                Rule::unique('admins')->ignore($this->id ?? null)->whereNull('deleted_at'),
             ],
-            'password'              => ['required', 'confirmed', Password::min(8)],
-            'password_confirmation' => ['required'],
-            'role'                  => ['required'],
-            'status'                => ['required'],
+            'role'       => ['required'],
+            'status'     => ['required'],
         ];
-    }
 
+        // パスワードは登録時のみバリデーションをかける
+        if (empty($this->id)) {
+            $rules['password']              = ['required', 'confirmed', Password::min(8)];
+            $rules['password_confirmation'] = ['required'];
+        }
+
+        return $rules;
+    }
 }

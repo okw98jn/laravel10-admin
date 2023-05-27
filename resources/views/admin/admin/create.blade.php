@@ -25,7 +25,7 @@
                         value="" name="password_confirmation" />
 
                     <x-admin.form.label id="role" text="権限" />
-                    <x-admin.form.select id="role" name="role" :array="AdminConsts::ROLE_LIST" />
+                    <x-admin.form.select id="role" name="role" :array="AdminConsts::ROLE_LIST" :default="0" />
 
                     <x-admin.form.label id="status" text="ステータス" />
                     <x-admin.form.radio id="status" name="status" :array="AppConsts::STATUS_LIST" :default="AppConsts::STATUS_VALID" />

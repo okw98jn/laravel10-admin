@@ -26,6 +26,19 @@ class CommonRepository
         return $this->model->paginate(AppConsts::PAGE_MAX_LIMIT);
     }
 
+    public function searchPagination(array $keywords)
+    {
+        $query = $this->model->query();
+
+        foreach ($keywords as $key => $value) {
+            if ($value !== null) {
+                $query->where($key, 'like', '%' . $value . '%');
+            }
+        }
+
+        return $query->paginate(AppConsts::PAGE_MAX_LIMIT);
+    }
+
     public function find($id)
     {
         return $this->model->find($id);
@@ -35,6 +48,13 @@ class CommonRepository
     {
         return DB::transaction(function () use ($data) {
             return $this->model->create($data);
+        });
+    }
+
+    public function update($id, array $data)
+    {
+        return DB::transaction(function () use ($id, $data) {
+            return $this->model->find($id)->update($data);
         });
     }
 

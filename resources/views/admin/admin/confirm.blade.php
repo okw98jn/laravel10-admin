@@ -3,8 +3,8 @@
     <div class="max-w-4xl px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
         <!-- Card -->
         <div class="bg-white rounded-xl shadow p-4 sm:p-7 dark:bg-slate-900">
-            <x-admin.form.header title="アカウント作成" subTitle="アカウントを作成しましょう" />
-            <form method="POST" action="{{ route('admin.admin.store') }}">
+            <x-admin.form.header title="確認" subTitle="修正がある場合は戻るボタンを押してください" />
+            <form method="POST" action="{{ $mode === 'store' ? route('admin.admin.store') : route('admin.admin.update', $id) }}">
                 @csrf
                 <!-- Grid -->
                 <div class="grid grid-cols-12 gap-4 sm:gap-6">
@@ -14,11 +14,13 @@
                     <x-admin.form.label id="login-id" text="ログインID" />
                     <x-admin.form.confirm-text text="{{ $inputs['login_id'] }}" />
 
-                    <x-admin.form.label id="password" text="パスワード" />
-                    <x-admin.form.confirm-text text="{{ $maskPassword }}" textSize="text-xs" />
+                    @if ($mode === 'store')
+                        <x-admin.form.label id="password" text="パスワード" />
+                        <x-admin.form.confirm-text text="{{ $maskPassword }}" textSize="text-xs" />
 
-                    <x-admin.form.label id="password-comfirm" text="パスワード確認" />
-                    <x-admin.form.confirm-text text="{{ $maskPassword }}" textSize="text-xs" />
+                        <x-admin.form.label id="password-comfirm" text="パスワード確認" />
+                        <x-admin.form.confirm-text text="{{ $maskPassword }}" textSize="text-xs" />
+                    @endif
 
                     <x-admin.form.label id="role" text="権限" />
                     <x-admin.form.confirm-text text="{{ AdminConsts::ROLE_LIST[$inputs['role']] }}" />

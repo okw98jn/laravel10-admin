@@ -33,9 +33,13 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // 管理者
     Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
+        Route::get('show/{id}', [AdminController::class, 'show'])->name('show');
         Route::get('create', [AdminController::class, 'create'])->name('create');
         Route::post('confirm', [AdminController::class, 'confirm'])->name('confirm');
         Route::post('store', [AdminController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [AdminController::class, 'edit'])->name('edit');
+        Route::post('edit_confirm/{id}', [AdminController::class, 'editConfirm'])->name('edit_confirm');
+        Route::post('update/{id}', [AdminController::class, 'update'])->name('update');
         Route::post('delete/{id}', [AdminController::class,'delete'])->name('delete');
     });
     

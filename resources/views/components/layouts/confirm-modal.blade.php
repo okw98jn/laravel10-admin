@@ -27,14 +27,14 @@
             </div>
             <div class="flex justify-end items-center gap-x-2 py-3 px-4 border-t dark:border-gray-700">
                 <button type="button"
-                    class="hs-dropup-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
+                    class="w-28 hs-dropup-toggle py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border font-medium bg-white text-gray-700 shadow-sm align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm dark:bg-slate-900 dark:hover:bg-slate-800 dark:border-gray-700 dark:text-gray-400 dark:hover:text-white dark:focus:ring-offset-gray-800"
                     data-hs-overlay="#{{ $id }}">
                     キャンセル
                 </button>
                 <form method="POST" action="{{ $route }}">
                     @csrf
                     <button type="submit"
-                        class="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold {{ $type == 'danger' ? 'bg-red-400' : 'bg-blue-400' }} text-white {{ $type == 'danger' ? 'hover:bg-red-600' : 'hover:bg-blue-600' }} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
+                        class="w-28 py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold {{ $type == 'danger' ? 'bg-red-400' : 'bg-blue-400' }} text-white {{ $type == 'danger' ? 'hover:bg-red-600' : 'hover:bg-blue-600' }} focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm dark:focus:ring-offset-gray-800">
                         {{ $btnText }}
                     </button>
                 </form>
