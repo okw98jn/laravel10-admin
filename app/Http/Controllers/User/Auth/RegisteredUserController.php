@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Auth;
+namespace App\Http\Controllers\User\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\Admin\Admin;
+use App\Models\User\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +20,7 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('admin.auth.register');
+        return view('user.auth.register');
     }
 
     /**
@@ -32,20 +32,20 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name'     => ['required', 'string', 'max:255'],
-            'login_id' => ['required', 'string', 'max:255', 'unique:'.Admin::class],
+            'email'    => ['required', 'string', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $admin = Admin::create([
+        $user = User::create([
             'name'     => $request->name,
-            'login_id' => $request->login_id,
+            'email'    => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        event(new Registered($admin));
+        event(new Registered($user));
 
-        Auth::guard('admins')->login($admin);
+        Auth::guard('users')->login($user);
 
-        return redirect(RouteServiceProvider::ADMIN_HOME);
+        return redirect(RouteServiceProvider::USER_HOME);
     }
 }
