@@ -17,17 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
-
-Route::middleware('guest')->group(function () {
+Route::middleware('guest:admins')->group(function () {
+    Route::get('/', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::get('login', [AuthenticatedSessionController::class, 'create'])->name('login');
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
     Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('register', [RegisteredUserController::class, 'store']);
 });
 
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/', [HomeController::class, 'index'])->name('top');
+Route::middleware(['web','auth:admins'])->group(function () {
+    Route::get('top', [HomeController::class, 'index'])->name('top');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 
     // 管理者
@@ -42,6 +41,4 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
         Route::post('update/{id}', [AdminController::class, 'update'])->name('update');
         Route::post('delete/{id}', [AdminController::class,'delete'])->name('delete');
     });
-    
-    
 });
