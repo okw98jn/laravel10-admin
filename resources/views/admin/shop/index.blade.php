@@ -8,15 +8,13 @@
                     <div
                         class="bg-white border border-gray-200 rounded-xl shadow-sm overflow-hidden dark:bg-slate-900 dark:border-gray-700">
                         <!-- Header -->
-                        <x-admin.table.header title="アカウント一覧" :isCsvExport="false" csvRoute="" btnLeftText="検索" btnRightText="追加" btnRightRoute="{{ route('admin.admin.create') }}" :searchValue="$keywords" />
+                        <x-admin.table.header title="店舗一覧" :isCsvExport="true" csvRoute="{{ route('admin.shop.exportCsv') }}" btnLeftText="検索" btnRightText="追加" btnRightRoute="{{ route('admin.shop.create') }}" :searchValue="$keywords" />
                         <x-admin.search-form.modal>
-                            <form action="{{ route('admin.admin.index') }}" method="GET">
+                            <form action="{{ route('admin.shop.index') }}" method="GET">
                                 <div class="grid gap-y-4">
                                     <!-- Form Group -->
-                                    <x-admin.search-form.input name="name" text="氏名" value="{{ $keywords['name'] ?? '' }}"/>
-                                    <x-admin.search-form.input name="login_id" text="ログインID" value="{{ $keywords['login_id'] ?? '' }}"/>
-                                    <x-admin.search-form.select name="role" text="権限" data="{{ $keywords['role'] ?? '' }}"
-                                        :array="AdminConsts::ROLE_LIST" />
+                                    <x-admin.search-form.input name="code" text="コード" value="{{ $keywords['name'] ?? '' }}"/>
+                                    <x-admin.search-form.input name="name" text="店舗名" value="{{ $keywords['login_id'] ?? '' }}"/>
                                     <x-admin.search-form.select name="status" text="ステータス" data="{{ $keywords['status'] ?? '' }}"
                                         :array="AppConsts::STATUS_LIST" />
                                     <!-- End Form Group -->
@@ -34,13 +32,16 @@
                                         <x-admin.table.th-text text="ID" />
                                     </x-admin.table.th>
                                     <x-admin.table.th>
-                                        <x-admin.table.th-text text="氏名" />
+                                        <x-admin.table.th-text text="コード" />
                                     </x-admin.table.th>
                                     <x-admin.table.th>
-                                        <x-admin.table.th-text text="ログインID" />
+                                        <x-admin.table.th-text text="店舗名" />
                                     </x-admin.table.th>
                                     <x-admin.table.th>
-                                        <x-admin.table.th-text text="権限" />
+                                        <x-admin.table.th-text text="郵便番号" />
+                                    </x-admin.table.th>
+                                    <x-admin.table.th>
+                                        <x-admin.table.th-text text="住所" />
                                     </x-admin.table.th>
                                     <x-admin.table.th>
                                         <x-admin.table.th-text text="ステータス" />
@@ -52,45 +53,51 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach ($admins as $index => $admin)
+                                @foreach ($shops as $index => $shop)
                                     <tr
                                         class="@if ($index % 2 == 1) bg-gray-50 @endif hover:bg-gray-200 transition duration-300 ease-in-out cursor-pointer">
                                         <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
-                                                <x-admin.table.td-text text="{{ $admin->id }}" />
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
+                                                <x-admin.table.td-text text="{{ $shop->id }}" />
                                             </a>
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
-                                                <x-admin.table.td-text text="{{ $admin->name }}" />
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
+                                                <x-admin.table.td-text text="{{ $shop->code }}" />
                                             </a>
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
-                                                <x-admin.table.td-text text="{{ $admin->login_id }}" />
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
+                                                <x-admin.table.td-text text="{{ $shop->name }}" />
                                             </a>
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
                                                 <x-admin.table.td-text
-                                                    text="{{ AdminConsts::ROLE_LIST[$admin->role] }}" />
+                                                    text="{{ $shop->zip }}" />
                                             </a>
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
-                                                <x-admin.table.td-status :status="$admin->status" />
-                                            </a>
-                                        </x-admin.table.td>
-                                        <x-admin.table.td>
-                                            <a href="{{ route('admin.admin.show', $admin->id) }}">
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
                                                 <x-admin.table.td-text
-                                                    text="{{ $admin->created_at->format(AppConsts::DATE_FORMAT) }}" />
+                                                    text="{{ $shop->prefectures . $shop->city . $shop->address }}" />
                                             </a>
                                         </x-admin.table.td>
                                         <x-admin.table.td>
-                                            <x-admin.table.td-btns :id="$admin->id" kind="アカウント"
-                                                routeEdit="{{ route('admin.admin.edit', $admin->id) }}"
-                                                routeDelete="{{ route('admin.admin.delete', $admin->id) }}" />
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
+                                                <x-admin.table.td-status :status="$shop->status" />
+                                            </a>
+                                        </x-admin.table.td>
+                                        <x-admin.table.td>
+                                            <a href="{{ route('admin.shop.show', $shop->id) }}">
+                                                <x-admin.table.td-text
+                                                    text="{{ $shop->created_at->format(AppConsts::DATE_FORMAT) }}" />
+                                            </a>
+                                        </x-admin.table.td>
+                                        <x-admin.table.td>
+                                            <x-admin.table.td-btns :id="$shop->id" kind="店舗"
+                                                routeEdit="{{ route('admin.shop.edit', $shop->id) }}"
+                                                routeDelete="{{ route('admin.shop.delete', $shop->id) }}" />
                                         </x-admin.table.td>
                                     </tr>
                                 @endforeach
@@ -99,7 +106,7 @@
                         <!-- End Table -->
                         <!-- Pagination -->
                         <div class="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-                            {{ $admins->onEachSide(1)->links('vendor.pagination.tailwind') }}
+                            {{ $shops->onEachSide(1)->links('vendor.pagination.tailwind') }}
                         </div>
                         <!-- End Footer -->
                     </div>

@@ -185,6 +185,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'AppConsts'   =>  App\Consts\AppConsts::class,
         'AdminConsts' =>  App\Consts\AdminConsts::class,
+        'ShopConsts'  =>  App\Consts\ShopConsts::class,
     ])->toArray(),
 
 ];

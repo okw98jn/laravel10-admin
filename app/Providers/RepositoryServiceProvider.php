@@ -12,5 +12,9 @@ class RepositoryServiceProvider extends ServiceProvider
             'App\Repositories\Admin\Admin\AdminRepositoryInterface',
             'App\Repositories\Admin\Admin\AdminRepository'
         );
+        $this->app->bind(
+            'App\Repositories\Admin\Shop\ShopRepositoryInterface',
+            'App\Repositories\Admin\Shop\ShopRepository'
+        );
     }
 }

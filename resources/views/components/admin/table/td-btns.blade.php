@@ -16,4 +16,4 @@
         </svg>
     </a>
 </div>
-<x-layouts.confirm-modal id="accountDeleteModal{{ $id }}" type="danger" title="確認" message="アカウントを削除しますか？" route="{{ $routeDelete }}" btnText="削除" />
+<x-layouts.confirm-modal id="accountDeleteModal{{ $id }}" type="danger" title="確認" message="{{ $kind }}を削除しますか？" route="{{ $routeDelete }}" btnText="削除" />

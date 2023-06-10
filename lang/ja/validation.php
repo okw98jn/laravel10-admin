@@ -248,6 +248,11 @@ return [
         'year' => '年',
         'login_id' => 'ログインID',
         'status' => 'ステータス',
+        'zip' => '郵便番号',
+        'prefectures' => '都道府県',
+        'city' => '市区町村',
+        'address' => '番地',
+        'tel' => '電話番号',
     ],
 
 ];

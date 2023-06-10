@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\HomeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,20 @@ Route::middleware('guest:admins')->group(function () {
 Route::middleware(['web','auth:admins'])->group(function () {
     Route::get('top', [HomeController::class, 'index'])->name('top');
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+
+    // 店舗
+    Route::prefix('shop')->name('shop.')->group(function () {
+        Route::get('/', [ShopController::class, 'index'])->name('index');
+        Route::post('export_csv', [ShopController::class, 'exportCsv'])->name('exportCsv');
+        Route::get('show/{id}', [ShopController::class, 'show'])->name('show');
+        Route::get('create', [ShopController::class, 'create'])->name('create');
+        Route::post('confirm', [ShopController::class, 'confirm'])->name('confirm');
+        Route::post('store', [ShopController::class, 'store'])->name('store');
+        Route::get('edit/{id}', [ShopController::class, 'edit'])->name('edit');
+        Route::post('edit_confirm/{id}', [ShopController::class, 'editConfirm'])->name('edit_confirm');
+        Route::post('update/{id}', [ShopController::class, 'update'])->name('update');
+        Route::post('delete/{id}', [ShopController::class,'delete'])->name('delete');
+    });
 
     // 管理者
     Route::prefix('admin')->name('admin.')->group(function () {

@@ -18,7 +18,7 @@ class AdminController extends Controller
     public function __construct(AdminRepositoryInterface $adminRepository, CommonService $commonService)
     {
         $this->adminRepository = $adminRepository;
-        $this->commonService          = $commonService;
+        $this->commonService   = $commonService;
     }
 
     public function index(Request $request)
@@ -58,7 +58,7 @@ class AdminController extends Controller
         $attributes             = $request->only(['name', 'login_id', 'password', 'role', 'status']);
         $attributes['password'] = Hash::make($request->input('password'));
         $admin = $this->adminRepository->create($attributes);
-        return redirect()->route('admin.admin.show', $admin->id)->with('message', 'アカウントの登録が完了しました');
+        return redirect()->route('admin.admin.show', $admin->id)->with(['type' => 'success', 'message' => 'アカウントの登録が完了しました']);
     }
 
     public function edit($id)
@@ -82,12 +82,12 @@ class AdminController extends Controller
         }
         $attributes = $request->only(['name', 'login_id', 'role', 'status']);
         $this->adminRepository->update($id, $attributes);
-        return redirect()->route('admin.admin.show', $id)->with('message', 'アカウントの変更が完了しました');
+        return redirect()->route('admin.admin.show', $id)->with(['type' => 'success', 'message' => 'アカウントの変更が完了しました']);
     }
 
     public function delete($id)
     {
         $this->adminRepository->delete($id);
-        return redirect()->back()->with('message', 'アカウントの削除が完了しました');
+        return redirect()->back()->with(['type' => 'success', 'message' => 'アカウントの削除が完了しました']);
     }
 }

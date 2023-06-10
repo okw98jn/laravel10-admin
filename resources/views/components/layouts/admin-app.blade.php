@@ -23,7 +23,7 @@
         <div class="container px-4 pt-2 sm:px-6 md:px-8 lg:pl-72">
             {{ $slot }}
             @if (session()->has('message'))
-                <x-layouts.alert-message message="{{ session('message') }}" />
+                <x-layouts.alert-message type="{{ session('type') }}" message="{{ session('message') }}" />
             @endif
         </div>
     </div>
